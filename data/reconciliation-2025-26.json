@@ -2597,11 +2597,11 @@
           "easy"
         ],
         "area": "Flaine_candidate",
-        "official_name_verified": false,
+        "official_name_verified": true,
         "official_difficulty_verified": false,
         "geometry_verified": false,
-        "status": "osm_name_found_review_needed",
-        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+        "status": "official_freeride_zone_name_supported_geometry_unverified",
+        "notes": "Official 2025/26 map lists this as secured ungroomed freeride zone, not an ordinary groomed piste. Exclude from standard groomed-piste navigation pending manual geometry and zone verification."
       },
       {
         "proposed_name": "Onyx",
@@ -2613,11 +2613,11 @@
           "advanced"
         ],
         "area": "Flaine_candidate",
-        "official_name_verified": false,
+        "official_name_verified": true,
         "official_difficulty_verified": false,
         "geometry_verified": false,
-        "status": "osm_name_found_review_needed",
-        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+        "status": "official_freeride_zone_name_supported_geometry_unverified",
+        "notes": "Official 2025/26 map lists this as secured ungroomed freeride zone, not an ordinary groomed piste. Exclude from standard groomed-piste navigation pending manual geometry and zone verification."
       },
       {
         "proposed_name": "Agate",
@@ -2648,11 +2648,11 @@
           "novice"
         ],
         "area": "Flaine_candidate",
-        "official_name_verified": false,
+        "official_name_verified": true,
         "official_difficulty_verified": false,
         "geometry_verified": false,
-        "status": "osm_name_found_review_needed",
-        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+        "status": "official_name_and_endpoints_supported_geometry_unverified",
+        "notes": "Official 2025/26 Grand Massif map explicitly labels Départ de la piste Cascades and Arrivée de la piste Cascades at Sixt/Salvagny; this supports named run and broad endpoints only. OSM mixes intermediate and novice sections; official colour and segment-by-segment geometry not verified. Return shuttle required; not a skiable loop."
       },
       {
         "proposed_name": "Lapiaz",
@@ -2899,6 +2899,25 @@
         "status": "osm_name_found_review_needed",
         "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
       }
-    ]
+    ],
+    "validation_pass": {
+      "date": "2026-10-14",
+      "reference": "Official Grand Massif 2025/26 piste map",
+      "scope": "Documented name/zone and broad endpoint facts only, not a geometric overlay",
+      "official_name_supported": [
+        "Cascades",
+        "Combe de Véret",
+        "Onyx"
+      ],
+      "geometry_verified_count": 0,
+      "difficulty_verified_count": 0,
+      "findings": [
+        "Cascades official map labels start and finish and warns that return requires Giffre shuttle.",
+        "Combe de Véret and Onyx appear in official secured ungroomed freeride-zone legend.",
+        "Coutaz screenshot places run near Salvagny/Passy: not evidence it is a Flaine core piste.",
+        "Traversée Diamant Noir screenshot appears continuous, but no independent official map colour or geometry verification has been completed.",
+        "Do not infer official piste colour from OSM difficulty alone."
+      ]
+    }
   }
 }
