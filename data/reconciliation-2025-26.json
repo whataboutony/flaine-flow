@@ -2488,11 +2488,14 @@
           "easy"
         ],
         "area": "Flaine_candidate",
-        "official_name_verified": false,
-        "official_difficulty_verified": false,
+        "official_name_verified": true,
+        "official_difficulty_verified": true,
         "geometry_verified": false,
-        "status": "osm_name_found_review_needed",
-        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+        "status": "official_name_colour_length_verified_geometry_pending",
+        "notes": "Flaine 2025/26 guide and press pack explicitly identify Serpentine as blue, 7 km, Grandes Platières. OSM easy agrees. Segment alignment and endpoints not yet verified.",
+        "official_difficulty": "blue",
+        "official_length_km": 7,
+        "official_description": "Les Grandes Platières; 7 km blue run"
       },
       {
         "proposed_name": "Tourmaline",
@@ -2507,11 +2510,12 @@
           "easy"
         ],
         "area": "Flaine_candidate",
-        "official_name_verified": false,
+        "official_name_verified": true,
         "official_difficulty_verified": false,
         "geometry_verified": false,
-        "status": "osm_name_found_review_needed",
-        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+        "status": "official_map_label_found_colour_geometry_pending",
+        "notes": "Tourmaline label appears in official Flaine 2025/26 guide map visual, but no sufficiently clear independent colour/length/segment verification yet. OSM easy is not official proof.",
+        "official_difficulty": null
       },
       {
         "proposed_name": "Cristal",
@@ -2651,8 +2655,10 @@
         "official_name_verified": true,
         "official_difficulty_verified": false,
         "geometry_verified": false,
-        "status": "official_name_and_endpoints_supported_geometry_unverified",
-        "notes": "Official 2025/26 Grand Massif map explicitly labels Départ de la piste Cascades and Arrivée de la piste Cascades at Sixt/Salvagny; this supports named run and broad endpoints only. OSM mixes intermediate and novice sections; official colour and segment-by-segment geometry not verified. Return shuttle required; not a skiable loop."
+        "status": "official_name_length_route_verified_colour_conflict_geometry_pending",
+        "notes": "Official sources confirm 14 km from Flaine/Grandes Platières toward Sixt and shuttle return; official 2025/26 guide calls it RED, whereas Flaine 2025 article and operator page call it BLUE. OSM has intermediate and novice sections. Do not override with unverified colour; exact geometry not checked.",
+        "official_difficulty": null,
+        "official_length_km": 14
       },
       {
         "proposed_name": "Lapiaz",
@@ -2910,14 +2916,17 @@
         "Onyx"
       ],
       "geometry_verified_count": 0,
-      "difficulty_verified_count": 0,
+      "difficulty_verified_count": 1,
       "findings": [
         "Cascades official map labels start and finish and warns that return requires Giffre shuttle.",
         "Combe de Véret and Onyx appear in official secured ungroomed freeride-zone legend.",
         "Coutaz screenshot places run near Salvagny/Passy: not evidence it is a Flaine core piste.",
         "Traversée Diamant Noir screenshot appears continuous, but no independent official map colour or geometry verification has been completed.",
         "Do not infer official piste colour from OSM difficulty alone.",
-        "Official PDF text extractions disagree on freeride zone 1 (Gape versus Agate); previous correction to Gape was premature."
+        "Official PDF text extractions disagree on freeride zone 1 (Gape versus Agate); previous correction to Gape was premature.",
+        "Serpentine blue and 7 km explicitly confirmed by official 2025/26 Flaine guide; OSM easy agrees.",
+        "Tourmaline name present in official guide map; exact official colour unresolved.",
+        "Cascades official-source contradiction: 2025/26 guide says red; other Flaine sources say blue. Do not classify as officially verified until resolved."
       ],
       "source_conflict": {
         "topic": "Flaine freeride zone 1 name",
@@ -2933,6 +2942,39 @@
         ],
         "resolution": "unresolved: conflicting official PDF text extraction; visually compare original artwork before confirming either label"
       }
+    },
+    "three_piste_comparison": {
+      "date": "2026-10-14",
+      "season": "2025/26 reference",
+      "pistes": [
+        "Serpentine",
+        "Tourmaline",
+        "Cascades"
+      ],
+      "official_sources": [
+        {
+          "url": "https://www.flaine.com/wp-content/uploads/2025/07/FLAINE_Guide2026-EN-MD.pdf",
+          "evidence": "Serpentine blue 7km; Cascades red 14km"
+        },
+        {
+          "url": "https://www.flaine.com/wp-content/uploads/2025/09/FLAINE-DOSSIER-DE-PRESSE_26_FR.pdf",
+          "evidence": "Serpentine blue 7km"
+        },
+        {
+          "url": "https://www.flaine.com/wp-content/uploads/2025/02/News-Flaine-du-ski-pour-tous-281124.pdf",
+          "evidence": "Cascades blue 14km"
+        },
+        {
+          "url": "https://www.flaine.com/fiche/grand-massif-domaines-skiables/",
+          "evidence": "Cascades blue 14km"
+        },
+        {
+          "url": "https://www.flaine.com/wp-content/uploads/2025/07/FLAINE_Guide2026-EN-MD.pdf",
+          "evidence": "Map labels Tourmaline"
+        }
+      ],
+      "summary": "Serpentine official colour verified blue; Tourmaline name confirmed but colour pending; Cascades official colour conflicts (red/blue), 14km route broadly confirmed. No full segment geometry verified.",
+      "geometry_verified_count": 0
     }
   }
 }
