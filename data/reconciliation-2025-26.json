@@ -2491,8 +2491,8 @@
         "official_name_verified": true,
         "official_difficulty_verified": true,
         "geometry_verified": false,
-        "status": "geometry_audit_failed_requires_segment_reconciliation",
-        "notes": "Official Serpentine blue 7km verified; nine OSM ways sum ~14.6km, contain two closed ways and five endpoint components. Geometry FAILS preliminary QA and is NOT verified.",
+        "status": "length_metrics_reconciled_geometry_not_verified",
+        "notes": "Serpentine official advertised length 7km vs connected OSM centreline ~4.75km; independent OSM-based route ~4.8km. No demonstrated missing 2.25km; preserve both metrics. Exact geometry remains unverified.",
         "official_difficulty": "blue",
         "official_length_km": 7,
         "official_description": "Les Grandes Platières; 7 km blue run",
@@ -2533,7 +2533,17 @@
           ],
           "provisional_core_length_km_approx": 4.747,
           "core_status": "visually_reviewable_not_verified",
-          "notes": "The 5 core segments form one exact-endpoint-connected chain (~4.75km); two closed ways (~9.58km together) likely represent area/boundary geometry, not centreline. Short disconnected pieces may be legitimate branches or missing links. Official 7km discrepancy remains unresolved."
+          "notes": "The 5 core segments form one exact-endpoint-connected chain (~4.75km); two closed ways (~9.58km together) likely represent area/boundary geometry, not centreline. Short disconnected pieces may be legitimate branches or missing links. Official 7km discrepancy remains unresolved.",
+          "distance_reconciliation": {
+            "official_advertised_km": 7,
+            "osm_centreline_km_approx": 4.75,
+            "independent_osm_based_route_km_approx": 4.8,
+            "independent_reference": "https://valpino.com/resort/flaine",
+            "difference_km_approx": 2.25,
+            "interpretation": "OSM-based route measurements independently agree near 4.8 km; no evidence that 2.25 km of the piste is missing. Official 7 km is an advertised figure with unspecified measurement method/route extent. These are different metrics; do not force the geometry to 7 km.",
+            "resolved_as": "measurement_definition_discrepancy_not_geometry_correction",
+            "geometry_verified": false
+          }
         }
       },
       {
