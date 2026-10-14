@@ -31,3 +31,14 @@ The candidate runs broadly from the Grandes Platières side towards Flaine, cons
 5. Confirm any changes for the 2026/27 season.
 
 **Decision:** `topology_checked_geometry_unverified`. Do not claim safe or certified navigation.
+
+## Short Serpentine object review — pause point (2026-10-14)
+
+Reviewed OSM ways `1257254973` and `1257254974` rather than deleting them as artefacts.
+
+- `1257254973`: a two-point ~172 m blue Serpentine line. It touches the selected Serpentine way `30791531` and Cristal `30791529`. It is also within ~19 m of Belzébuth.
+- `1257254974`: a two-point ~99 m blue Serpentine line. It touches selected Serpentine `30791531`, Cristal, Émeraude, Belzébuth and Lucifer in the OSM geometry; Tanzanite is within ~3 m.
+
+These objects sit in a dense piste-junction area. Their topology is therefore consistent with **connector/branch geometry**, rather than random detached artefacts. But because this conclusion is derived from the same OSM database, it is not independent evidence that each mapped crossing is physically skiable or officially part of Serpentine.
+
+**Decision at pause:** keep both raw objects and their provenance; exclude them from the single canonical display centreline for now; mark them `branch_candidate_requires_independent_confirmation`. Do not delete, merge, or use them for routing until independently checked.
