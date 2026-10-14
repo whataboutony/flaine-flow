@@ -101,3 +101,25 @@ A Flaine candidate set exists in `data/reconciliation-2025-26.json`. Serpentine 
 
 ## Safety / licensing
 Retain © OpenStreetMap contributors (ODbL), OpenFreeMap/OpenMapTiles attribution and the independent-project disclaimer. Never present static OSM data as live piste status. The prototype is not certified navigation; resort signs, closures, weather and official operational information take precedence.
+
+
+## Product differentiation checkpoint — 2026-10-14
+
+Competitor review changed the positioning. Existing ski-navigation products already advertise combinations of digital piste maps, turn-by-turn navigation, offline maps, ability-based routing, group tracking and, in some cases, snowboard/flat-aware routing. **Flaine Flow should not assume that basic piste navigation or flat avoidance alone is a moat.**
+
+Current product hypothesis: **“Navigation that understands how you ride.”**
+
+Promising differentiation hypotheses to test:
+- **Riding-style routing:** optimise not just difficulty/time but the experience — e.g. carving-friendly consistent gradients, relaxed cruising, progression, exploration, snowboard-friendly terrain, fewer awkward traverses/junctions.
+- **Explainable routing:** show why one route is recommended over another (e.g. +5 minutes but avoids a long flat and has more continuous downhill terrain). Routing should expose meaningful costs rather than behave as a black box.
+- **Time-aware “Get Me Home”:** eventually account for location, ability, estimated travel time, critical lift connections and trustworthy lift closing/operational data. Never make live/safety claims without reliable operational feeds.
+- **Mixed-ability group routing:** find a route suitable for everyone or allow riders to take different suitable pistes and reconverge at a shared lift/meeting point.
+- **Personalised piste recommendations:** eventually learn rider preferences from explicit feedback such as too flat, great for carving, narrow, crowded, beginner-friendly, etc. Start with transparent rules; do not pretend to have a trained recommendation model without data.
+
+Potential long-term structure:
+1. **Reliable mountain-routing engine** — canonical piste geometry, junctions, lifts, elevation/direction, constraints and provenance.
+2. **Personalised navigation layer** — rider style/preferences, route explanations, group needs and eventually contextual recommendations.
+
+Key strategic test before major expansion: **Does an existing competitor already solve the user's real Flaine navigation problem well enough?** Test competitor apps in/for Flaine and document exactly where they succeed or fail, especially for snowboard-specific routing and route explainability. Use the observed gaps — not assumptions — to decide Flaine Flow's differentiation.
+
+Scaling hypothesis: Flaine is the proving ground, not the final market. If the canonical-data + routing pipeline becomes repeatable, additional French resorts should become an onboarding/data-QA problem rather than a rewrite. Do not scale resort coverage until the Flaine validation/routing workflow is robust.
