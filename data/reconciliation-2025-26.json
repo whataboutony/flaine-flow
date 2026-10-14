@@ -2491,11 +2491,34 @@
         "official_name_verified": true,
         "official_difficulty_verified": true,
         "geometry_verified": false,
-        "status": "official_name_colour_length_verified_geometry_pending",
-        "notes": "Flaine 2025/26 guide and press pack explicitly identify Serpentine as blue, 7 km, Grandes Platières. OSM easy agrees. Segment alignment and endpoints not yet verified.",
+        "status": "geometry_audit_failed_requires_segment_reconciliation",
+        "notes": "Official Serpentine blue 7km verified; nine OSM ways sum ~14.6km, contain two closed ways and five endpoint components. Geometry FAILS preliminary QA and is NOT verified.",
         "official_difficulty": "blue",
         "official_length_km": 7,
-        "official_description": "Les Grandes Platières; 7 km blue run"
+        "official_description": "Les Grandes Platières; 7 km blue run",
+        "geometry_audit": {
+          "date": "2026-10-14",
+          "osm_segment_count": 9,
+          "raw_segment_length_km_approx": 14.6,
+          "official_length_km": 7,
+          "exact_endpoint_connected_components": 5,
+          "closed_ways": [
+            1485662236,
+            1485664434
+          ],
+          "isolated_short_segments": [
+            1257254973,
+            1257254974
+          ],
+          "findings": [
+            "Raw summed OSM length (~14.6 km) is over twice the official advertised 7 km, likely includes overlapping geometry, alternate mapped sections or loops; not a valid single-route length.",
+            "Two OSM ways are closed LineStrings (start=end), unsuitable for naive piste routing.",
+            "Five endpoint-connected components under ~3m matching tolerance; topology not validated.",
+            "Official blue classification agrees with OSM easy for all nine segments.",
+            "No official georeferenced centreline available to certify exact geometry."
+          ],
+          "verified": false
+        }
       },
       {
         "proposed_name": "Tourmaline",
@@ -2926,7 +2949,8 @@
         "Official PDF text extractions disagree on freeride zone 1 (Gape versus Agate); previous correction to Gape was premature.",
         "Serpentine blue and 7 km explicitly confirmed by official 2025/26 Flaine guide; OSM easy agrees.",
         "Tourmaline name present in official guide map; exact official colour unresolved.",
-        "Cascades official-source contradiction: 2025/26 guide says red; other Flaine sources say blue. Do not classify as officially verified until resolved."
+        "Cascades official-source contradiction: 2025/26 guide says red; other Flaine sources say blue. Do not classify as officially verified until resolved.",
+        "Serpentine geometry audit FAIL: nine OSM segments sum ~14.6km versus official 7km, five endpoint components and two closed ways. Do not mark verified or routeable."
       ],
       "source_conflict": {
         "topic": "Flaine freeride zone 1 name",
