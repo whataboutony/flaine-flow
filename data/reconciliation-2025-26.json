@@ -2517,7 +2517,23 @@
             "Official blue classification agrees with OSM easy for all nine segments.",
             "No official georeferenced centreline available to certify exact geometry."
           ],
-          "verified": false
+          "verified": false,
+          "provisional_core_osm_ids": [
+            30160803,
+            30791531,
+            718343867,
+            828925195,
+            1223500519
+          ],
+          "excluded_from_highlight_osm_ids": [
+            1257254973,
+            1257254974,
+            1485662236,
+            1485664434
+          ],
+          "provisional_core_length_km_approx": 4.747,
+          "core_status": "visually_reviewable_not_verified",
+          "notes": "The 5 core segments form one exact-endpoint-connected chain (~4.75km); two closed ways (~9.58km together) likely represent area/boundary geometry, not centreline. Short disconnected pieces may be legitimate branches or missing links. Official 7km discrepancy remains unresolved."
         }
       },
       {
