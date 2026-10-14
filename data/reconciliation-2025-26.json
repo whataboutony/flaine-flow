@@ -2432,5 +2432,41 @@
     "OSM named segments are not equivalent to official piste counts.",
     "The map is for 2025/26, not confirmed 2026/27.",
     "Candidate special-zone name matches are not geographic verification."
-  ]
+  ],
+  "flaine_reconciliation": {
+    "area": "Flaine",
+    "season": "2025/26 reference; 2026/27 pending",
+    "official_sources": [
+      {
+        "url": "https://www.flaine.com/wp-content/uploads/2025/07/FLAINE_Guide2026-EN-MD.pdf",
+        "description": "2025/26 brochure: 64 marked runs, 24 lifts"
+      },
+      {
+        "url": "https://www.flaine.com/plan-des-pistes/",
+        "description": "Official piste-status page snapshot: 9 green, 29 blue, 26 red, 6 black (sum 70); page also displays 0/82 open, inconsistent with both breakdown and brochure"
+      },
+      {
+        "url": "https://www.flaine.com/wp-content/uploads/2025/11/GM_PlanPistes_25_26_HD.pdf",
+        "description": "Official map, colour-coded trails; no structured list of individual pistes"
+      }
+    ],
+    "official_summary": {
+      "brochure_marked_runs": 64,
+      "brochure_lifts": 24,
+      "status_page_colour_totals": {
+        "green": 9,
+        "blue": 29,
+        "red": 26,
+        "black": 6
+      },
+      "status_page_colour_sum": 70,
+      "status_page_displayed_total": 82
+    },
+    "reconciliation_status": "not_yet_reconciled",
+    "notes": [
+      "The conflicting official counts must be resolved before calculating a match rate.",
+      "The 157 named OSM pistes span the broader Grand Massif extraction; do not treat all as Flaine pistes.",
+      "Piste-level official classification and geographic boundaries require review; no automated area assignment asserted."
+    ]
+  }
 }
