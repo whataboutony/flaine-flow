@@ -2384,8 +2384,8 @@
       "type": "secured_ungroomed",
       "official_reference": "Grand Massif 2025/26 piste map, legend",
       "osm_candidate_names": [],
-      "match_status": "candidate_only",
-      "note": "Corrected from Agate: official 2025/26 Grand Massif map freeride legend lists Gape. Agate exists as an OSM piste name but is not this official freeride-zone label."
+      "match_status": "source_conflict_unresolved",
+      "note": "UNRESOLVED: official 2025/26 PDF extractions conflict between Gape and Agate; inspect original map visually before verification."
     },
     {
       "name": "Combe de Véret",
@@ -2632,8 +2632,8 @@
         "official_name_verified": false,
         "official_difficulty_verified": false,
         "geometry_verified": false,
-        "status": "osm_name_found_review_needed",
-        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+        "status": "official_source_conflict_review_needed",
+        "notes": "OSM has Agate. Official 2025/26 PDF text extraction conflicts with another official PDF on freeride zone 1 (Agate/Gape); cannot verify official identity yet."
       },
       {
         "proposed_name": "Cascades",
@@ -2916,8 +2916,23 @@
         "Combe de Véret and Onyx appear in official secured ungroomed freeride-zone legend.",
         "Coutaz screenshot places run near Salvagny/Passy: not evidence it is a Flaine core piste.",
         "Traversée Diamant Noir screenshot appears continuous, but no independent official map colour or geometry verification has been completed.",
-        "Do not infer official piste colour from OSM difficulty alone."
-      ]
+        "Do not infer official piste colour from OSM difficulty alone.",
+        "Official PDF text extractions disagree on freeride zone 1 (Gape versus Agate); previous correction to Gape was premature."
+      ],
+      "source_conflict": {
+        "topic": "Flaine freeride zone 1 name",
+        "official_sources": [
+          {
+            "url": "https://www.flaine.com/wp-content/uploads/2025/11/GM_PlanPistes_25_26_HD.pdf",
+            "extracted_label": "Gape"
+          },
+          {
+            "url": "https://www.grand-massif.com/content/uploads/2025/12/GM_PlanPistes-1.pdf",
+            "extracted_label": "Agate"
+          }
+        ],
+        "resolution": "unresolved: conflicting official PDF text extraction; visually compare original artwork before confirming either label"
+      }
     }
   }
 }
