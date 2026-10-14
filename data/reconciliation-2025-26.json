@@ -2379,14 +2379,13 @@
       "match_status": "candidate_only"
     },
     {
-      "name": "Agate",
+      "name": "Gape",
       "area": "Flaine",
       "type": "secured_ungroomed",
       "official_reference": "Grand Massif 2025/26 piste map, legend",
-      "osm_candidate_names": [
-        "Agate"
-      ],
-      "match_status": "candidate_only"
+      "osm_candidate_names": [],
+      "match_status": "candidate_only",
+      "note": "Corrected from Agate: official 2025/26 Grand Massif map freeride legend lists Gape. Agate exists as an OSM piste name but is not this official freeride-zone label."
     },
     {
       "name": "Combe de Véret",
@@ -2462,11 +2461,444 @@
       "status_page_colour_sum": 70,
       "status_page_displayed_total": 82
     },
-    "reconciliation_status": "not_yet_reconciled",
+    "reconciliation_status": "candidate_inventory_started_not_verified",
     "notes": [
       "The conflicting official counts must be resolved before calculating a match rate.",
       "The 157 named OSM pistes span the broader Grand Massif extraction; do not treat all as Flaine pistes.",
-      "Piste-level official classification and geographic boundaries require review; no automated area assignment asserted."
+      "Piste-level official classification and geographic boundaries require review; no automated area assignment asserted.",
+      "Initial 24-name Flaine-focused review queue added; entries are NOT counted as official matches.",
+      "Corrected official freeride-zone legend: Gape, Combe de Véret, Onyx (Combe de Gers). Agate was a transcription error."
+    ],
+    "candidate_pistes": [
+      {
+        "proposed_name": "Serpentine",
+        "osm_name": "Serpentine",
+        "osm_segment_ids": [
+          30160803,
+          30791531,
+          718343867,
+          828925195,
+          1223500519,
+          1257254973,
+          1257254974,
+          1485662236,
+          1485664434
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Tourmaline",
+        "osm_name": "Tourmaline",
+        "osm_segment_ids": [
+          201293117,
+          1223497758,
+          1223497762,
+          1356167753
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Cristal",
+        "osm_name": "Cristal",
+        "osm_segment_ids": [
+          30791529,
+          1485672699
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Aigue Marine",
+        "osm_name": "Aigue Marine",
+        "osm_segment_ids": [
+          32450481,
+          1485663538
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Perce-neige",
+        "osm_name": "Perce-neige",
+        "osm_segment_ids": [
+          29357506,
+          264202357,
+          467219041,
+          1232693482
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Diamant noir",
+        "osm_name": "Diamant noir",
+        "osm_segment_ids": [
+          30700957,
+          1149539381,
+          1257254975
+        ],
+        "osm_difficulties": [
+          "advanced"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Combe de Véret",
+        "osm_name": "Combe de Véret",
+        "osm_segment_ids": [
+          55792194,
+          1223497760,
+          1485663934
+        ],
+        "osm_difficulties": [
+          "advanced",
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Onyx",
+        "osm_name": "Onyx",
+        "osm_segment_ids": [
+          32451315
+        ],
+        "osm_difficulties": [
+          "advanced"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Agate",
+        "osm_name": "Agate",
+        "osm_segment_ids": [
+          32860927
+        ],
+        "osm_difficulties": [
+          "advanced"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Cascades",
+        "osm_name": "Cascades",
+        "osm_segment_ids": [
+          30160824,
+          718343858,
+          718343860
+        ],
+        "osm_difficulties": [
+          "intermediate",
+          "novice"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Lapiaz",
+        "osm_name": "Lapiaz",
+        "osm_segment_ids": [
+          32860932,
+          198738239,
+          1057670725
+        ],
+        "osm_difficulties": [
+          "intermediate"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Grenat",
+        "osm_name": "Grenat",
+        "osm_segment_ids": [
+          30160815,
+          193785815,
+          362601362,
+          1232699555,
+          1442191818,
+          1485643823
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Rubis",
+        "osm_name": "rubis",
+        "osm_segment_ids": [
+          193548605,
+          198738241,
+          198738242,
+          844412152,
+          844412153
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Malachite",
+        "osm_name": "Malachite",
+        "osm_segment_ids": [
+          32450479
+        ],
+        "osm_difficulties": [
+          "novice"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Quartz",
+        "osm_name": "Quartz",
+        "osm_segment_ids": [
+          1031030885
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Saphir",
+        "osm_name": "Saphir",
+        "osm_segment_ids": [
+          55792206
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Topaze",
+        "osm_name": "Topaze",
+        "osm_segment_ids": [
+          32451303,
+          1232688368
+        ],
+        "osm_difficulties": [
+          "intermediate"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Jade",
+        "osm_name": "Jade",
+        "osm_segment_ids": [
+          32861957,
+          1223500518
+        ],
+        "osm_difficulties": [
+          "intermediate"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Turquoise",
+        "osm_name": "Turquoise",
+        "osm_segment_ids": [
+          32451311,
+          1232688369,
+          1485674513
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Tanzanite",
+        "osm_name": "Tanzanite",
+        "osm_segment_ids": [
+          30700968,
+          1485662569
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Zéolite",
+        "osm_name": "Zéolite",
+        "osm_segment_ids": [
+          32451313,
+          1485670769
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Silice",
+        "osm_name": "Silice",
+        "osm_segment_ids": [
+          31103100,
+          1257186313
+        ],
+        "osm_difficulties": [
+          "easy"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Aventurine",
+        "osm_name": "Aventurine",
+        "osm_segment_ids": [
+          201281722,
+          1485663788
+        ],
+        "osm_difficulties": [
+          "intermediate"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      },
+      {
+        "proposed_name": "Azurite",
+        "osm_name": "Azurite",
+        "osm_segment_ids": [
+          30791535,
+          712612919,
+          1485675744
+        ],
+        "osm_difficulties": [
+          "intermediate"
+        ],
+        "area": "Flaine_candidate",
+        "official_name_verified": false,
+        "official_difficulty_verified": false,
+        "geometry_verified": false,
+        "status": "osm_name_found_review_needed",
+        "notes": "Candidate only; must visually confirm official 2025/26 map label, colour, area and exact segment geometry."
+      }
     ]
   }
 }
