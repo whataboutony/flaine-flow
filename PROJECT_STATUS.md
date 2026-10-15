@@ -91,6 +91,10 @@ A Flaine candidate set exists in `data/reconciliation-2025-26.json`. Serpentine 
 - Official piste map is schematic and should be used as a reference, not copied as map artwork.
 - GitHub Pages may show cancelled checks on superseded commits when newer deployments replace them; do not confuse that with piste-QA failure.
 
+## Elevation experiment — 2026-10-16
+
+`index.html` now contains an experimental Serpentine terrain-elevation profile. When Serpentine is selected, the browser batches its 58 original canonical vertices to the Open-Meteo elevation endpoint (Copernicus GLO-90 terrain model), plots elevation against cumulative geodesic distance, reports start/end/net elevation, and flags vertex-to-vertex model intervals above +2% as uphill and −3% to +2% as flat-ish. This is a first routing experiment only: 90 m DEM resolution is too coarse for metre-level piste features, and the current flags are not yet snowboard-routing truth. The map remains usable if the elevation service fails. A future production build should precompute elevation server/build-side, preferably from a finer DEM, rather than depend on a browser API call.
+
 ## Exact next action when resuming
 **Do not start Tourmaline immediately.** First finish Serpentine's independent geometry evidence:
 1. Find a trustworthy independent/georeferenced trace or authoritative spatial reference for Serpentine's bends/endpoints.
