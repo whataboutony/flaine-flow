@@ -144,3 +144,8 @@ Serpentine's COP30 UI now derives a snowboard-oriented terrain signal from the 2
 ## Terrain-section visual QA — 2026-10-16
 
 The Serpentine elevation panel now reports each sustained flat/uphill section with its distance-along-piste range, length and average grade, and overlays the corresponding interval as a translucent band on the elevation chart. This is intended to make the ~100 m-window classifier visually auditable before scaling COP30 terrain processing to other pistes. Current classifier parameters remain experimental.
+
+
+## Optional 3D terrain map — 2026-10-16
+
+The map UI now includes a 3D/2D terrain toggle. 3D mode adds a MapLibre raster-DEM terrain source plus hillshade, applies modest terrain exaggeration (1.25), and pitches/bears the camera for mountain context; 2D remains the default QA view. This 3D basemap is visual context only and is separate from the static COP30 Serpentine analytical profile. Do not treat 3D terrain rendering as piste-geometry verification.
