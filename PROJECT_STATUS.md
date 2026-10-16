@@ -134,3 +134,8 @@ Scaling hypothesis: Flaine is the proving ground, not the final market. If the c
 Serpentine now has a build-time static Copernicus GLO-30 profile in `data/serpentine-elevation-cop30.json`. The builder `scripts/build_serpentine_elevation.py` densifies the canonical five-way centreline to approximately 25 m spacing and samples both N45E006 and N46E006 tiles because the route crosses 46°N. A tile-boundary bug in the first attempt produced invalid 0 m samples; the current sampler checks raster bounds/seams and fails on invalid/non-positive elevations.
 
 Validated output: 191 samples over 4.738 km, 2477.1 m start to 1679.7 m end, no invalid samples. `index.html` now reads this static COP30 JSON instead of calling Open-Meteo/GLO-90 in the browser. Current point-to-point 25 m grade flags are still experimental and intentionally labelled raw/not smoothed; do not use them as routing truth until sustained-gradient smoothing is implemented. COP30 improves terrain resolution but does not verify lateral piste geometry.
+
+
+## Sustained-gradient experiment — 2026-10-16
+
+Serpentine's COP30 UI now derives a snowboard-oriented terrain signal from the 25 m samples using an approximately 100 m centred grade window. Consecutive classifications are merged and only flat-ish/uphill sections at least 75 m long are surfaced. Thresholds remain experimental: uphill > +2%; flat-ish −3% to +2%; otherwise downhill. The raw 25 m totals remain visible as QA context. This is intentionally a first transparent rule set, not routing truth. Before mountain-wide scaling, visually inspect the detected Serpentine sections and tune window/threshold/minimum-section parameters if they produce implausible snowboard-relevance.
