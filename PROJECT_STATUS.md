@@ -127,3 +127,10 @@ Potential long-term structure:
 Key strategic test before major expansion: **Does an existing competitor already solve the user's real Flaine navigation problem well enough?** Test competitor apps in/for Flaine and document exactly where they succeed or fail, especially for snowboard-specific routing and route explainability. Use the observed gaps — not assumptions — to decide Flaine Flow's differentiation.
 
 Scaling hypothesis: Flaine is the proving ground, not the final market. If the canonical-data + routing pipeline becomes repeatable, additional French resorts should become an onboarding/data-QA problem rather than a rewrite. Do not scale resort coverage until the Flaine validation/routing workflow is robust.
+
+
+## COP30 elevation upgrade — 2026-10-16
+
+Serpentine now has a build-time static Copernicus GLO-30 profile in `data/serpentine-elevation-cop30.json`. The builder `scripts/build_serpentine_elevation.py` densifies the canonical five-way centreline to approximately 25 m spacing and samples both N45E006 and N46E006 tiles because the route crosses 46°N. A tile-boundary bug in the first attempt produced invalid 0 m samples; the current sampler checks raster bounds/seams and fails on invalid/non-positive elevations.
+
+Validated output: 191 samples over 4.738 km, 2477.1 m start to 1679.7 m end, no invalid samples. `index.html` now reads this static COP30 JSON instead of calling Open-Meteo/GLO-90 in the browser. Current point-to-point 25 m grade flags are still experimental and intentionally labelled raw/not smoothed; do not use them as routing truth until sustained-gradient smoothing is implemented. COP30 improves terrain resolution but does not verify lateral piste geometry.
