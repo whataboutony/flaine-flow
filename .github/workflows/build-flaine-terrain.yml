@@ -2,7 +2,9 @@ name: Build Flaine terrain grid
 on:
   workflow_dispatch:
   push:
-    paths: ['scripts/build_flaine_terrain.py']
+    paths:
+      - 'scripts/build_flaine_terrain.py'
+      - '.github/workflows/build-flaine-terrain.yml'
 permissions:
   contents: write
 jobs:
