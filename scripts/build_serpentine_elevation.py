@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a static 30 m Copernicus GLO-30 elevation profile for Serpentine."""
+"""Build a static 30 m Copernicus GLO-30 elevation profile for Serpentine.\nSamples the canonical centreline at approximately 25 m spacing.\n"""
 import json, math, tempfile, urllib.request
 from pathlib import Path
 import rasterio
