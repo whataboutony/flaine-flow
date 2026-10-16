@@ -149,3 +149,10 @@ The Serpentine elevation panel now reports each sustained flat/uphill section wi
 ## Optional 3D terrain map — 2026-10-16
 
 The map UI now includes a 3D/2D terrain toggle. 3D mode adds a MapLibre raster-DEM terrain source plus hillshade, applies modest terrain exaggeration (1.25), and pitches/bears the camera for mountain context; 2D remains the default QA view. This 3D basemap is visual context only and is separate from the static COP30 Serpentine analytical profile. Do not treat 3D terrain rendering as piste-geometry verification.
+
+
+## Raised-relief terrain model — 2026-10-16
+
+A separate `terrain-model.html` prototype now renders a Flaine-wide real Copernicus GLO-30 grid from `data/flaine-terrain-cop30.json` as a Three.js triangulated mesh. The build pipeline is `scripts/build_flaine_terrain.py` + `.github/workflows/build-flaine-terrain.yml`. Current grid is 121×101 over bounds 6.64–6.76E / 45.965–46.035N and is a DSM, not surveyed piste terrain. The main map exposes this view via the Terrain Model button.
+
+After visual QA showed excessive vertical walls and a blank white mountain, the viewer was revised to lower vertical exaggeration and geographically project `pistes.geojson` onto the same DEM bounds. Pistes/lifts are drawn into the terrain texture and also as slightly elevated Three.js lines so they remain visible while orbiting. This is the correct architecture for the requested physical raised-relief look, but visual appearance still needs browser QA; do not claim it matches the reference until inspected. A richer cartographic basemap texture (roads/landcover/labels) is still pending; current drape is the ski network on a simple terrain background.
