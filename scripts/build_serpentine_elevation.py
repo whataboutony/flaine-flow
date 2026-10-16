@@ -9,7 +9,10 @@ PISTES=ROOT/"pistes.geojson"
 OUT=ROOT/"data"/"serpentine-elevation-cop30.json"
 ORDER=[828925195,718343867,1223500519,30160803,30791531]
 SPACING_M=25.0
-TILE_URL="https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N45_00_E006_00_DEM/Copernicus_DSM_COG_10_N45_00_E006_00_DEM.tif"
+TILE_URLS={
+ 45:"https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N45_00_E006_00_DEM/Copernicus_DSM_COG_10_N45_00_E006_00_DEM.tif",
+ 46:"https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N46_00_E006_00_DEM/Copernicus_DSM_COG_10_N46_00_E006_00_DEM.tif",
+}
 
 def hav(a,b):
  r=6371000.; p1,p2=map(math.radians,[a[1],b[1]]); dp=math.radians(b[1]-a[1]); dl=math.radians(b[0]-a[0])
@@ -42,13 +45,32 @@ def densify(line,spacing):
 
 data=json.loads(PISTES.read_text())
 line=join(data); pts=densify(line,SPACING_M)
-with tempfile.NamedTemporaryFile(suffix=".tif") as tmp:
- urllib.request.urlretrieve(TILE_URL,tmp.name)
- with rasterio.open(tmp.name) as ds:
-  elev=[float(v[0]) for v in ds.sample([(p[0],p[1]) for p in pts])]
+# Serpentine crosses the 46°N tile boundary. Load every required latitude tile
+# and sample each point from its containing one-degree COP30 raster.
+tile_files={}
+datasets={}
+try:
+ for lat_deg,url in TILE_URLS.items():
+  tmp=tempfile.NamedTemporaryFile(suffix=f"-N{lat_deg}.tif",delete=False)
+  tmp.close(); urllib.request.urlretrieve(url,tmp.name); tile_files[lat_deg]=tmp.name
+  datasets[lat_deg]=rasterio.open(tmp.name)
+ elev=[]
+ for lon,lat in pts:
+  lat_deg=math.floor(lat)
+  ds=datasets.get(lat_deg)
+  if ds is None: raise RuntimeError(f"No COP30 tile loaded for latitude {lat}")
+  val=float(next(ds.sample([(lon,lat)]))[0])
+  if not math.isfinite(val) or val<=0:
+   raise RuntimeError(f"Invalid COP30 elevation {val} at {lon},{lat} from N{lat_deg} tile")
+  elev.append(val)
+finally:
+ for ds in datasets.values(): ds.close()
+ for path in tile_files.values():
+  try: Path(path).unlink()
+  except FileNotFoundError: pass
 dist=[0.]
 for a,b in zip(pts,pts[1:]): dist.append(dist[-1]+hav(a,b))
 samples=[{"distance_m":round(d,1),"lon":round(p[0],7),"lat":round(p[1],7),"elevation_m":round(z,1)} for d,p,z in zip(dist,pts,elev)]
-payload={"piste":"Serpentine","source":"Copernicus DEM GLO-30 Public (AWS Open Data, 2021 release)","model":"DSM","resolution_m":30,"sample_spacing_m":SPACING_M,"raw_geometry_vertices":len(line),"sample_count":len(samples),"mapped_distance_m":round(dist[-1],1),"samples":samples}
+payload={"piste":"Serpentine","source":"Copernicus DEM GLO-30 Public (AWS Open Data, 2021 release)","model":"DSM","resolution_m":30,"sample_spacing_m":SPACING_M,"raw_geometry_vertices":len(line),"sample_count":len(samples),"mapped_distance_m":round(dist[-1],1),"tiles":["N45E006","N46E006"],"validation":{"min_elevation_m":round(min(elev),1),"max_elevation_m":round(max(elev),1),"zero_or_invalid_samples":sum(1 for z in elev if not math.isfinite(z) or z<=0)},"samples":samples}
 OUT.parent.mkdir(exist_ok=True); OUT.write_text(json.dumps(payload,indent=2)+"\n")
 print(f"Wrote {OUT}: {len(samples)} samples over {dist[-1]/1000:.3f} km")
