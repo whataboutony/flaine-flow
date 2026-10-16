@@ -47,8 +47,18 @@ function renderElevation(){
  const net=e.at(-1)-e[0],verticalDrop=Math.max(0,e[0]-e.at(-1));
  const avgNetGrade=total?100*net/total:0,avgAbsGrade=total?weightedAbsGrade/total:0;
  const direction=net<0?'candidate order descends':'candidate order climbs';
- stats.innerHTML='<b>'+Math.round(e[0])+' m → '+Math.round(e.at(-1))+' m</b> · net '+(net>0?'+':'')+Math.round(net)+' m · '+direction+'<br>Raw 25 m flags: '+Math.round(uphill)+' m uphill &gt;2% · '+Math.round(flat)+' m flat-ish (−3% to +2%)';
- card.innerHTML='<b>Terrain (experimental COP30)</b><br>Elevation: '+Math.round(e[0])+' m → '+Math.round(e.at(-1))+' m · vertical drop '+Math.round(verticalDrop)+' m<br>Mapped distance: '+(total/1000).toFixed(2)+' km · net gradient '+avgNetGrade.toFixed(1)+'%<br>Terrain variation: '+Math.round(totalDescent)+' m descent / '+Math.round(totalAscent)+' m ascent · mean |grade| '+avgAbsGrade.toFixed(1)+'%<br><span style="color:#526475">191 samples · ~25 m spacing · raw flags not yet smoothed for routing</span>';
+ // Snowboard terrain signal: grade over a centred ~100 m window rather than
+ // individual 25 m DEM intervals. Merge consecutive classifications and only
+ // report sustained flat/uphill sections >=75 m.
+ const WINDOW_M=100,MIN_SECTION_M=75;
+ function nearestIndex(target){let best=0,err=Infinity;for(let i=0;i<dist.length;i++){const x=Math.abs(dist[i]-target);if(x<err){err=x;best=i}}return best}
+ const terrain=dist.map((d,i)=>{const a=nearestIndex(Math.max(0,d-WINDOW_M/2)),b=nearestIndex(Math.min(total,d+WINDOW_M/2)),span=dist[b]-dist[a],g=span?100*(e[b]-e[a])/span:0;return g>2?'uphill':g>=-3?'flat':'downhill'});
+ const sections=[];let ss=0;
+ for(let i=1;i<=terrain.length;i++){if(i===terrain.length||terrain[i]!==terrain[ss]){const start=dist[ss],end=dist[Math.min(i,dist.length-1)],len=end-start,type=terrain[ss];if((type==='flat'||type==='uphill')&&len>=MIN_SECTION_M){const a=ss,b=Math.min(i,dist.length-1),grade=(end>start)?100*(e[b]-e[a])/(end-start):0;sections.push({type,start,end,len,grade})}ss=i}}
+ const sustainedUp=sections.filter(x=>x.type==='uphill').reduce((a,x)=>a+x.len,0),sustainedFlat=sections.filter(x=>x.type==='flat').reduce((a,x)=>a+x.len,0);
+ const sectionText=sections.length?sections.map(x=>(x.type==='uphill'?'↗ rise':'→ flat')+' '+(x.start/1000).toFixed(2)+'–'+(x.end/1000).toFixed(2)+' km · '+Math.round(x.len)+' m · '+(x.grade>=0?'+':'')+x.grade.toFixed(1)+'%').join('<br>'):'No sustained flat/uphill sections ≥'+MIN_SECTION_M+' m detected.';
+ stats.innerHTML='<b>'+Math.round(e[0])+' m → '+Math.round(e.at(-1))+' m</b> · net '+(net>0?'+':'')+Math.round(net)+' m · '+direction+'<br><b>Smoothed ~100 m:</b> '+Math.round(sustainedUp)+' m sustained uphill · '+Math.round(sustainedFlat)+' m sustained flat-ish<br>'+sectionText+'<br><span style="color:#526475">Raw 25 m flags for QA: '+Math.round(uphill)+' m uphill · '+Math.round(flat)+' m flat-ish</span>';
+ card.innerHTML='<b>Terrain (experimental COP30)</b><br>Elevation: '+Math.round(e[0])+' m → '+Math.round(e.at(-1))+' m · vertical drop '+Math.round(verticalDrop)+' m<br>Mapped distance: '+(total/1000).toFixed(2)+' km · net gradient '+avgNetGrade.toFixed(1)+'%<br>Terrain variation: '+Math.round(totalDescent)+' m descent / '+Math.round(totalAscent)+' m ascent · mean |grade| '+avgAbsGrade.toFixed(1)+'%<br>Snowboard signal: '+Math.round(sustainedFlat)+' m sustained flat-ish / '+Math.round(sustainedUp)+' m sustained uphill<br><span style="color:#526475">191 samples · ~25 m spacing · ~100 m grade window · ≥75 m sections</span>';
  svg.innerHTML='<polygon class="fill" points="'+fill+'"></polygon><polyline class="profile" points="'+line+'"></polyline><text class="axis" x="2" y="10">'+Math.round(max)+' m</text><text class="axis" x="2" y="89">'+Math.round(min)+' m</text><text class="axis" x="272" y="89">'+(total/1000).toFixed(2)+' km</text>';
 }
 async function loadSerpentineElevation(){
