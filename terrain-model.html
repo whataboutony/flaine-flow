@@ -5,14 +5,30 @@
 import * as THREE from 'three';import {OrbitControls} from 'https://unpkg.com/three@0.169.0/examples/jsm/controls/OrbitControls.js';
 const d=await fetch('./data/flaine-terrain-cop30.json').then(r=>{if(!r.ok)throw Error('Terrain grid not built yet');return r.json()});
 const renderer=new THREE.WebGLRenderer({antialias:true});document.body.appendChild(renderer.domElement);renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;
-const scene=new THREE.Scene();scene.background=new THREE.Color(0xd9e3e9);const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.1,200);camera.position.set(11,8,13);
-const ctl=new OrbitControls(camera,renderer.domElement);ctl.enableDamping=true;ctl.target.set(0,1.5,0);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0xd9e3e9);const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.1,200);camera.position.set(10,6.3,11.5);
+const ctl=new OrbitControls(camera,renderer.domElement);ctl.enableDamping=true;ctl.target.set(0,1.0,0);
 scene.add(new THREE.HemisphereLight(0xffffff,0x687365,2.0));const sun=new THREE.DirectionalLight(0xfff7e8,3.6);sun.position.set(-8,14,8);sun.castShadow=true;scene.add(sun);
-const rows=d.rows,cols=d.cols,W=13,H=8.2,z0=d.min_elevation_m,vertical=0.0042,pos=[],colors=[],ix=[];
+const rows=d.rows,cols=d.cols,W=13,H=8.2,z0=d.min_elevation_m,vertical=0.00145,pos=[],uv=[],ix=[];
+const B=d.bounds;
+function terrainY(lon,lat){const cf=(lon-B.west)/(B.east-B.west)*(cols-1),rf=(B.north-lat)/(B.north-B.south)*(rows-1),c=Math.max(0,Math.min(cols-1,Math.round(cf))),r=Math.max(0,Math.min(rows-1,Math.round(rf)));return (d.elevations_m[r][c]-z0)*vertical}
+function world(lon,lat,lift=0){return new THREE.Vector3(((lon-B.west)/(B.east-B.west)-.5)*W,terrainY(lon,lat)+lift,((B.north-lat)/(B.north-B.south)-.5)*H)}
 for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const e=d.elevations_m[r][c],x=(c/(cols-1)-.5)*W,z=(r/(rows-1)-.5)*H,y=(e-z0)*vertical;pos.push(x,y,z);const t=(e-d.min_elevation_m)/(d.max_elevation_m-d.min_elevation_m);colors.push(.66+.30*t,.72+.25*t,.69+.28*t)}
 for(let r=0;r<rows-1;r++)for(let c=0;c<cols-1;c++){let a=r*cols+c,b=a+1,cc=a+cols,dd=cc+1;ix.push(a,cc,b,b,cc,dd)}
-const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));g.setIndex(ix);g.computeVertexNormals();
-const terrain=new THREE.Mesh(g,new THREE.MeshStandardMaterial({vertexColors:true,roughness:.96}));terrain.castShadow=terrain.receiveShadow=true;scene.add(terrain);
+const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();
+const mapTex=new THREE.TextureLoader().load('https://tile.openstreetmap.org/0/0/0.png'); // placeholder immediately replaced by geographic canvas below
+const texCanvas=document.createElement('canvas');texCanvas.width=1400;texCanvas.height=900;const ctx=texCanvas.getContext('2d');ctx.fillStyle='#e8eee0';ctx.fillRect(0,0,1400,900);
+const tex=new THREE.CanvasTexture(texCanvas);tex.colorSpace=THREE.SRGBColorSpace;
+const terrain=new THREE.Mesh(g,new THREE.MeshStandardMaterial({map:tex,roughness:.94}));terrain.castShadow=terrain.receiveShadow=true;scene.add(terrain);
+// Draw the actual Flaine piste/lift network both onto the terrain texture and as slightly raised 3D lines.
+const pisteData=await fetch('./pistes.geojson').then(r=>r.json());
+function px(lon,lat){return [(lon-B.west)/(B.east-B.west)*texCanvas.width,(B.north-lat)/(B.north-B.south)*texCanvas.height]}
+const pisteColors={novice:'#32a852',easy:'#287bd1',intermediate:'#d8423f',advanced:'#202124',expert:'#7c3fa0',freeride:'#8a5a2b'};
+for(const f of pisteData.features){let geom=f.geometry;if(!geom||!['LineString','MultiLineString'].includes(geom.type))continue;let lines=geom.type==='LineString'?[geom.coordinates]:geom.coordinates;const p=f.properties||{},isLift=!!(p.aerialway||p.lift_type||p.feature_type==='lift'),color=isLift?'#73777d':(pisteColors[p.piste_difficulty]||'#89939a');
+ for(const line of lines){const inside=line.filter(q=>q[0]>=B.west&&q[0]<=B.east&&q[1]>=B.south&&q[1]<=B.north);if(inside.length<2)continue;
+  ctx.beginPath();inside.forEach((q,i)=>{const a=px(q[0],q[1]);i?ctx.lineTo(...a):ctx.moveTo(...a)});ctx.strokeStyle=color;ctx.globalAlpha=isLift?.65:.92;ctx.lineWidth=isLift?1.4:2.8;ctx.stroke();ctx.globalAlpha=1;
+  const pts=inside.map(q=>world(q[0],q[1],.018));const lg=new THREE.BufferGeometry().setFromPoints(pts);scene.add(new THREE.Line(lg,new THREE.LineBasicMaterial({color})));
+ }}
+tex.needsUpdate=true;
 const base=new THREE.Mesh(new THREE.BoxGeometry(W,.35,H),new THREE.MeshStandardMaterial({color:0xaab3a7,roughness:1}));base.position.y=-.19;scene.add(base);
 function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}addEventListener('resize',resize);resize();
 (function loop(){ctl.update();renderer.render(scene,camera);requestAnimationFrame(loop)})();
