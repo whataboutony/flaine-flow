@@ -139,3 +139,8 @@ Validated output: 191 samples over 4.738 km, 2477.1 m start to 1679.7 m end, no 
 ## Sustained-gradient experiment — 2026-10-16
 
 Serpentine's COP30 UI now derives a snowboard-oriented terrain signal from the 25 m samples using an approximately 100 m centred grade window. Consecutive classifications are merged and only flat-ish/uphill sections at least 75 m long are surfaced. Thresholds remain experimental: uphill > +2%; flat-ish −3% to +2%; otherwise downhill. The raw 25 m totals remain visible as QA context. This is intentionally a first transparent rule set, not routing truth. Before mountain-wide scaling, visually inspect the detected Serpentine sections and tune window/threshold/minimum-section parameters if they produce implausible snowboard-relevance.
+
+
+## Terrain-section visual QA — 2026-10-16
+
+The Serpentine elevation panel now reports each sustained flat/uphill section with its distance-along-piste range, length and average grade, and overlays the corresponding interval as a translucent band on the elevation chart. This is intended to make the ~100 m-window classifier visually auditable before scaling COP30 terrain processing to other pistes. Current classifier parameters remain experimental.
