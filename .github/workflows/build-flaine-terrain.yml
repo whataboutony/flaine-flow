@@ -1,0 +1,23 @@
+name: Build Flaine terrain grid
+on:
+  workflow_dispatch:
+  push:
+    paths: ['scripts/build_flaine_terrain.py']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install rasterio
+      - run: python scripts/build_flaine_terrain.py
+      - name: Commit terrain grid
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add data/flaine-terrain-cop30.json
+          git diff --cached --quiet || git commit -m "Build Flaine COP30 terrain grid"
+          git push
