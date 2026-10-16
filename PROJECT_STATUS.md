@@ -156,3 +156,55 @@ The map UI now includes a 3D/2D terrain toggle. 3D mode adds a MapLibre raster-D
 A separate `terrain-model.html` prototype now renders a Flaine-wide real Copernicus GLO-30 grid from `data/flaine-terrain-cop30.json` as a Three.js triangulated mesh. The build pipeline is `scripts/build_flaine_terrain.py` + `.github/workflows/build-flaine-terrain.yml`. Current grid is 121×101 over bounds 6.64–6.76E / 45.965–46.035N and is a DSM, not surveyed piste terrain. The main map exposes this view via the Terrain Model button.
 
 After visual QA showed excessive vertical walls and a blank white mountain, the viewer was revised to lower vertical exaggeration and geographically project `pistes.geojson` onto the same DEM bounds. Pistes/lifts are drawn into the terrain texture and also as slightly elevated Three.js lines so they remain visible while orbiting. This is the correct architecture for the requested physical raised-relief look, but visual appearance still needs browser QA; do not claim it matches the reference until inspected. A richer cartographic basemap texture (roads/landcover/labels) is still pending; current drape is the ski network on a simple terrain background.
+
+
+## PAUSE CHECKPOINT — raised-relief visual QA — 2026-10-16
+
+Work paused here at the user's request. **Read this section first when resuming the raised-relief work.**
+
+### What is now working
+- `terrain-model.html` is a separate Three.js raised-relief viewer reachable from the main app via **Terrain Model**.
+- It uses the generated real Flaine-wide Copernicus GLO-30 grid in `data/flaine-terrain-cop30.json`, not procedural/fake terrain.
+- Terrain build pipeline: `scripts/build_flaine_terrain.py` + `.github/workflows/build-flaine-terrain.yml`.
+- Grid: 121 × 101 = 12,221 elevation samples; bounds 6.64–6.76E / 45.965–46.035N; source is Copernicus GLO-30 DSM; generated file currently reports 527.6–2666.5 m over the crop.
+- The DEM is triangulated into an orbitable Three.js mesh. Drag/orbit and zoom work.
+- `pistes.geojson` is geographically projected onto the same DEM bounds. Pistes/lifts are painted into the terrain canvas texture and also rendered as slightly elevated 3D lines so they follow the terrain and remain visible while orbiting.
+- Piste colours now use the actual GeoJSON `difficulty` property; lifts use `kind === 'lift'` / lift fields.
+- A runtime crash introduced during the first drape attempt was fixed in commit `d91925ed0db867762949371f262935ae213329c8`: obsolete `colors.push(...)` referenced an undefined array after the mesh moved to UVs. Do not reintroduce it.
+- Vertical exaggeration was reduced from the first extreme version (0.0042 world units per elevation metre) to 0.00145. The current screenshot shows a recognisable raised-relief mountain rather than the earlier near-vertical white walls.
+
+### Visual QA from the latest user screenshot
+The latest rendered screenshot is the first version that is clearly moving in the desired direction: a physical-looking Flaine terrain slab with coloured ski runs following the mountain surface. The user explicitly said **“we are moving in the right direction.”** This validates the architecture, not the final styling.
+
+Still visibly wrong/incomplete:
+1. Surface is essentially plain pale/white terrain rather than a recognisable cartographic Flaine map.
+2. Raw OSM piste network is visually busy/spaghetti-like; many lines are too prominent and raw geometries should not all have equal visual weight.
+3. Lift styling needs a clearer visual language distinct from pistes.
+4. Terrain lighting/material needs refinement so ridges, bowls and valleys read clearly without looking washed out.
+5. Camera/default framing can be tuned after cartography is added.
+6. The rectangular physical base/slab is useful for the raised-relief concept but its thickness/colour can be refined.
+7. This is still a visual prototype and **not navigation-ready**; raw OSM geometry and static DEM do not establish official alignment, live status or safe routing.
+
+### Exact next visual actions when resuming
+1. **Do not replace the Three.js/DEM architecture.** It is now the right foundation.
+2. Add a real cartographic surface texture aligned to the exact DEM bounds: useful landcover/forest, roads/buildings, terrain context and selective labels. Preserve all required attribution/licensing; do not copy Grand Massif's official map artwork.
+3. Keep pistes/lifts as vector overlays above that texture. Reduce raw-network clutter using opacity/line width and hierarchy; lifts should be visually distinct.
+4. Where a piste has a cleaned/validated canonical representation (currently Serpentine is topology-checked but not official-alignment verified), prefer that for presentation while retaining raw geometry for QA. Do not silently call provisional geometry verified.
+5. Tune terrain material, directional light, ambient light, vertical exaggeration and initial camera only after the cartographic drape is visible.
+6. Add useful labels selectively rather than dumping every OSM name into 3D.
+7. Re-test visually in the deployed browser and ask for a screenshot before claiming the raised-relief look is finished.
+
+### Relationship to the main product
+The raised-relief view is a presentation/navigation-context layer. It does **not** replace the core data-validation work. Flaine Flow's important long-term pieces remain: canonical piste/lift graph, provenance and QA, direction/elevation/terrain costs, routing constraints, explainable snowboard/riding-style routing, and eventually trustworthy operational data. Serpentine remains the current validation test case; topology is checked but official spatial alignment/navigation readiness is not verified.
+
+### Key files to inspect on resume
+- `PROJECT_STATUS.md` — this checkpoint plus validation history.
+- `terrain-model.html` — raised-relief renderer and piste/lift drape.
+- `data/flaine-terrain-cop30.json` — real Flaine terrain grid.
+- `scripts/build_flaine_terrain.py` — terrain-grid generator.
+- `.github/workflows/build-flaine-terrain.yml` — terrain build automation.
+- `pistes.geojson` — current raw piste/lift source.
+- `terrain3d.js` — older MapLibre terrain/contour mode; useful as a separate map-style 3D mode, not the physical relief implementation.
+- `data/reconciliation-2025-26.json` and `reports/serpentine-geometry-qa.md` — validation/provenance state.
+
+**Resume instruction:** start by reading `PROJECT_STATUS.md`, then inspect the deployed `terrain-model.html`. The next intended task is cartographic draping + visual hierarchy, not another DEM rewrite.
